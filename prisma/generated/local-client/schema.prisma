@@ -1,0 +1,41 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+  output        = "../generated/local-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SlotSpins {
+  id            String  @id @default(uuid()) @db.Uuid
+  userId        String  @db.Uuid
+  gameId        Int
+  type          String
+  value         Decimal @db.Decimal(10, 2)
+  transactionId String
+  gameToken     String
+  agregator     String
+
+  createdAt DateTime @default(now())
+
+  @@index([id, userId])
+}
+
+model SlotsMobule {
+  id          Int     @id @default(autoincrement())
+  game_id     Int
+  title       String? @db.VarChar(44)
+  alias       String? @db.VarChar(32)
+  provider    String? @db.VarChar(10)
+  show        Int
+  category_id String? @db.VarChar(2)
+  is_live     Int
+  priority    Int
+  created_at  String? @db.VarChar(19)
+  updated_at  String? @db.VarChar(19)
+
+  @@map("slotsmobule")
+}

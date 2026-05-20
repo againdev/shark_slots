@@ -1,0 +1,350 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "debian-openssl-3.0.x"]
+  output        = "../generated/main-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("MAIN_DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(uuid()) @db.Uuid
+  email           String?  @unique
+  hashPassword    String?
+  tgId            BigInt?  @unique
+  googleId        String?  @unique
+  firstName       String
+  lastName        String?
+  username        String?
+  isPremium       Boolean? @default(false)
+  languageCode    String?
+  allowsWriteToPm Boolean? @default(false)
+  photoUrl        String?
+  clientSeed      String   @unique
+  role            Role     @default(USER)
+  ban             Boolean  @default(false)
+
+  registerIp   String
+  lastLoginIp  String
+  deviceHeight Int?
+  deviceWidth  Int?
+
+  games    Int     @default(0)
+  betSum   Decimal @default(0.0) @db.Decimal(10, 4)
+  winSum   Decimal @default(0.0) @db.Decimal(10, 4)
+  topWin   Decimal @default(0.0) @db.Decimal(10, 4)
+  deposit  Decimal @default(0.0) @db.Decimal(10, 4)
+  withdraw Decimal @default(0.0) @db.Decimal(10, 4)
+  balance  Decimal @default(0.0) @db.Decimal(10, 4)
+  wager    Decimal @default(0.0) @db.Decimal(10, 4)
+
+  rakeBackBalance           Decimal  @default(0.0) @db.Decimal(10, 6)
+  totalRakeBackAmount       Decimal  @default(0.0) @db.Decimal(10, 6)
+  hasClaimedTgBonus         Boolean  @default(false)
+  everydayBonusClaimedAt    DateTime @default(now())
+  dayRakeBackBonusValidTo   DateTime @default(now())
+  weekRakeBackBonusValidTo  DateTime @default(now())
+  monthRakeBackBonusValidTo DateTime @default(now())
+  vipMemberRakeBackBonus    Boolean  @default(false)
+  isActivateWelcomeBonus    Boolean  @default(false)
+
+  referalCode        String    @unique
+  referal            Referal?  @relation("ReferalUser")
+  userReferals       Referal[] @relation("UserReferal")
+  referralBalance    Decimal   @default(0.0) @db.Decimal(10, 4)
+  revSharePercent    Int       @default(20)
+  bonusForReferral   Decimal   @default(0.2) @db.Decimal(10, 2)
+  claimedRankBonuses Int[]
+
+  promocodes Promocode[] @relation("UserPromocodes")
+  partners   Partner[]   @relation("UserPartner")
+
+  x50       X50[]      @relation("UserX50")
+  mines     Mines[]    @relation("UserMines")
+  dice      Dice[]     @relation("UserDice")
+  freespins Freespin[] @relation("UserFreespin")
+
+  deposits  Deposit[]  @relation("UserDeposit")
+  withdraws Withdraw[] @relation("UserWithdraw")
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  TournamentWinner TournamentWinner[]
+
+  @@index([id, tgId, isPremium])
+}
+
+model X50 {
+  id         String    @id @db.Uuid
+  roundId    BigInt
+  betSum     Decimal?  @db.Decimal(10, 4)
+  winSum     Decimal?  @db.Decimal(10, 4)
+  isWin      Boolean   @default(false)
+  userId     String?   @db.Uuid
+  betCoeff   X50Coeff?
+  lotto      BigInt
+  serverSeed String
+  winCoeff   X50Coeff
+  winIndex   Int
+  user       User?     @relation("UserX50", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  hasBets   Boolean  @default(false)
+
+  @@index([id, userId, betCoeff, winCoeff, roundId])
+}
+
+model Mines {
+  id            BigInt   @id
+  clientSeed    String
+  serverSeed    String
+  betSum        Decimal  @db.Decimal(10, 4)
+  winSum        Decimal? @db.Decimal(10, 4)
+  minesNum      Int
+  stepNumber    Int      @default(0)
+  multiplier    Decimal  @default(1.0) @db.Decimal(10, 2)
+  isWin         Boolean  @default(false)
+  isFinished    Boolean  @default(false)
+  minesPosition Int[]
+  userSteps     Int[]    @default([])
+
+  userId String @db.Uuid
+  user   User   @relation("UserMines", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([id, userId])
+}
+
+model Dice {
+  id         BigInt  @id
+  clientSeed String
+  serverSeed String
+  betSum     Decimal @db.Decimal(10, 4)
+  winSum     Decimal @db.Decimal(10, 4)
+  payout     Decimal @db.Decimal(10, 2)
+  isWin      Boolean
+  minBetNum  Decimal @db.Decimal(10, 2)
+  maxBetNum  Decimal @db.Decimal(10, 2)
+  winNum     Decimal @db.Decimal(10, 2)
+
+  userId String @db.Uuid
+  user   User   @relation("UserDice", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([id, userId])
+}
+
+model ServerSeedHistory {
+  id         String    @id @default(uuid()) @db.Uuid
+  serverSeed String
+  lotto      BigInt
+  validFrom  DateTime  @default(now())
+  validTo    DateTime?
+  createdAt  DateTime  @default(now())
+}
+
+model Referal {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId            String  @unique @db.Uuid
+  user              User    @relation("ReferalUser", fields: [userId], references: [id])
+  tgId              BigInt? @unique
+  hasClaimedTgBonus Boolean @default(false)
+  deposit           Decimal @default(0.0) @db.Decimal(10, 4)
+  profitFromUser    Decimal @default(0.0) @db.Decimal(10, 4)
+
+  referralId String @db.Uuid
+  referal    User   @relation("UserReferal", fields: [referralId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Promocode {
+  id        String   @id @default(uuid()) @db.Uuid
+  promocode String   @unique
+  amount    Decimal? @db.Decimal(10, 2)
+  activated Int      @default(0)
+  activates Int
+
+  isFreeSpins Boolean @default(false)
+  gameId      Int?
+  count       Int?
+  betLevel    Int?    @default(1)
+  rate        Int?    @default(1)
+
+  partnerId String?  @db.Uuid
+  partner   Partner? @relation(fields: [partnerId], references: [id])
+  users     User[]   @relation("UserPromocodes")
+
+  createdAt DateTime @default(now())
+}
+
+model Deposit {
+  id String @id @default(uuid()) @db.Uuid
+
+  amount        Decimal       @default(0.0) @db.Decimal(10, 2)
+  tokenName     String
+  paymentSystem PaymentSystem
+
+  status    String
+  trackerId String @unique
+  receiver  String
+
+  userId String @db.Uuid
+  user   User   @relation("UserDeposit", fields: [userId], references: [id])
+
+  dateExpire DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([id, userId])
+}
+
+model Withdraw {
+  id String @id @default(uuid()) @db.Uuid
+
+  amount         Decimal       @db.Decimal(10, 2)
+  chainComission Decimal       @db.Decimal(10, 2)
+  tokenName      String
+  paymentSystem  PaymentSystem
+
+  status    String
+  trackerId String? @unique
+  receiver  String
+
+  userId String @db.Uuid
+  user   User   @relation("UserWithdraw", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([id, userId])
+}
+
+model Partner {
+  id String @id @default(uuid()) @db.Uuid
+
+  platform              String
+  channelLink           String
+  channelName           String
+  numberOfSubscribers   Int
+  additionalInformation String?
+  contact               String
+
+  status    String?
+  amount    Decimal? @db.Decimal(10, 2)
+  activates Int
+
+  isFreeSpins Boolean @default(false)
+  gameId      Int?
+  count       Int?
+  betLevel    Int?    @default(1)
+  rate        Int?    @default(1)
+
+  promocodes Promocode[]
+  userId     String      @db.Uuid
+  user       User        @relation("UserPartner", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([id, userId])
+}
+
+model Freespin {
+  id String @id @default(uuid()) @db.Uuid
+
+  gameId   Int
+  count    Int
+  status   Int     @default(0)
+  betLevel Int     @default(1)
+  rate     Int     @default(1)
+  isPromo  Boolean
+  userId   String  @db.Uuid
+  user     User    @relation("UserFreespin", fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([id, userId])
+}
+
+model Tournament {
+  id        String             @id @default(uuid()) @db.Uuid
+  type      TournamentType
+  startDate DateTime
+  endDate   DateTime
+  isActive  Boolean            @default(true)
+  prizes    Decimal[]          @db.Decimal(10, 2)
+  winners   TournamentWinner[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type, isActive, endDate])
+}
+
+model TournamentWinner {
+  id           String     @id @default(uuid()) @db.Uuid
+  userId       String     @db.Uuid
+  tournamentId String     @db.Uuid
+  prizeAmount  Decimal    @db.Decimal(10, 2)
+  rank         Int
+  score        Int
+  user         User       @relation(fields: [userId], references: [id])
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tournamentId, rank])
+  @@index([userId, tournamentId])
+}
+
+enum TournamentType {
+  REFERRAL
+  GAME
+}
+
+enum X50Coeff {
+  X2
+  X3
+  X5
+  X50
+}
+
+enum Role {
+  USER
+  YOUTUBER
+  ADMIN
+}
+
+enum PaymentSystem {
+  EXNODEPAY
+  CRYPTO_BOT
+  FK
+  STREAMPAY
+  REPAY
+  NIRVANA
+}
+
+model SlotsMobule {
+  id          Int     @id @default(autoincrement())
+  game_id     Int
+  title       String? @db.VarChar(44)
+  alias       String? @db.VarChar(32)
+  provider    String? @db.VarChar(10)
+  show        Int
+  category_id String? @db.VarChar(2)
+  is_live     Int
+  priority    Int
+  created_at  String? @db.VarChar(19)
+  updated_at  String? @db.VarChar(19)
+
+  @@map("slotsmobule")
+}

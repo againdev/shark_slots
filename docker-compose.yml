@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_slots
+    environment:
+      POSTGRES_USER: E5WXZIaMPLOeSUdO7Tj8
+      POSTGRES_PASSWORD: Otc4lb33HpOdZjArd0ey
+      POSTGRES_DB: postgres
+    ports:
+      - '5434:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis_slots
+    ports:
+      - '6380:6379'
+    command: redis-server --appendonly yes
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer_slots
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+
+volumes:
+  postgres_data:

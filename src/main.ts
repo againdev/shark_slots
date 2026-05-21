@@ -5,7 +5,10 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bufferLogs: true });
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+    rawBody: true,
+  });
   const configService = app.get(ConfigService);
 
   const adress = configService.get<AppConfig['APP_ADDRESS']>('APP_ADDRESS')!;

@@ -2,6 +2,7 @@ import {
   IsArray,
   IsBoolean,
   IsNumber,
+  IsOptional,
   IsString,
   validateSync,
 } from 'class-validator';
@@ -51,6 +52,30 @@ export class AppConfig {
 
   @IsString()
   readonly MAIN_APP_URL: string;
+
+  /** IP Mobule / прокси для колбэков, через запятую. Если не задано — дефолт в MobuleService. */
+  @IsOptional()
+  @IsString()
+  readonly MOBULE_ALLOWED_IPS?: string;
+
+  /** Токен Crypto Pay (@CryptoBot) — для проверки подписи входящего webhook. */
+  @IsString()
+  readonly CRYPTO_BOT_API_TOKEN: string;
+
+  /**
+   * Общий секрет shark_slots → main (заголовок X-Internal-Webhook-Secret).
+   * Должен совпадать с INTERNAL_WEBHOOK_SECRET на основном бэкенде.
+   */
+  @IsString()
+  readonly INTERNAL_WEBHOOK_SECRET: string;
+
+  /**
+   * Полный URL обработчика на main (если не задан — MAIN_APP_URL + /crypto-bot/y825...).
+   * Пример: https://api.shark.example/crypto-bot/y825xaasdtq9ds4zacsfodra6me7qg
+   */
+  @IsOptional()
+  @IsString()
+  readonly MAIN_CRYPTO_BOT_WEBHOOK_URL?: string;
 }
 
 export function validateAppConfig(config: Record<string, unknown>) {

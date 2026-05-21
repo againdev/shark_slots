@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.17.1
- * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.17.1",
-  engine: "272a37d34178c2894197e17273bf937f25acdeac"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -147,15 +147,11 @@ exports.Prisma.UserScalarFieldEnum = {
   deposit: 'deposit',
   withdraw: 'withdraw',
   balance: 'balance',
+  currency: 'currency',
   wager: 'wager',
   rakeBackBalance: 'rakeBackBalance',
   totalRakeBackAmount: 'totalRakeBackAmount',
   hasClaimedTgBonus: 'hasClaimedTgBonus',
-  everydayBonusClaimedAt: 'everydayBonusClaimedAt',
-  dayRakeBackBonusValidTo: 'dayRakeBackBonusValidTo',
-  weekRakeBackBonusValidTo: 'weekRakeBackBonusValidTo',
-  monthRakeBackBonusValidTo: 'monthRakeBackBonusValidTo',
-  vipMemberRakeBackBonus: 'vipMemberRakeBackBonus',
   isActivateWelcomeBonus: 'isActivateWelcomeBonus',
   referalCode: 'referalCode',
   referralBalance: 'referralBalance',
@@ -366,6 +362,12 @@ exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   YOUTUBER: 'YOUTUBER',
   ADMIN: 'ADMIN'
+};
+
+exports.Currency = exports.$Enums.Currency = {
+  USD: 'USD',
+  EUR: 'EUR',
+  UAH: 'UAH'
 };
 
 exports.X50Coeff = exports.$Enums.X50Coeff = {

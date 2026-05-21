@@ -37,18 +37,14 @@ model User {
   topWin   Decimal @default(0.0) @db.Decimal(10, 4)
   deposit  Decimal @default(0.0) @db.Decimal(10, 4)
   withdraw Decimal @default(0.0) @db.Decimal(10, 4)
-  balance  Decimal @default(0.0) @db.Decimal(10, 4)
-  wager    Decimal @default(0.0) @db.Decimal(10, 4)
+  balance  Decimal  @default(0.0) @db.Decimal(10, 4)
+  currency Currency?
+  wager    Decimal  @default(0.0) @db.Decimal(10, 4)
 
-  rakeBackBalance           Decimal  @default(0.0) @db.Decimal(10, 6)
-  totalRakeBackAmount       Decimal  @default(0.0) @db.Decimal(10, 6)
-  hasClaimedTgBonus         Boolean  @default(false)
-  everydayBonusClaimedAt    DateTime @default(now())
-  dayRakeBackBonusValidTo   DateTime @default(now())
-  weekRakeBackBonusValidTo  DateTime @default(now())
-  monthRakeBackBonusValidTo DateTime @default(now())
-  vipMemberRakeBackBonus    Boolean  @default(false)
-  isActivateWelcomeBonus    Boolean  @default(false)
+  rakeBackBalance        Decimal @default(0.0) @db.Decimal(10, 6)
+  totalRakeBackAmount    Decimal @default(0.0) @db.Decimal(10, 6)
+  hasClaimedTgBonus      Boolean @default(false)
+  isActivateWelcomeBonus Boolean @default(false)
 
   referalCode        String    @unique
   referal            Referal?  @relation("ReferalUser")
@@ -316,6 +312,12 @@ enum X50Coeff {
   X3
   X5
   X50
+}
+
+enum Currency {
+  USD
+  EUR
+  UAH
 }
 
 enum Role {

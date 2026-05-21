@@ -1,0 +1,25 @@
+# Stack 2/2 — NestJS backend.
+# Запуск: docker compose -f docker-compose.backend.yml up -d --build
+
+networks:
+  slots-net:
+    external: true
+    name: slots-net
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slots-backend
+    networks:
+      - slots-net
+    ports:
+      - '127.0.0.1:4001:4001'
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      APP_ADDRESS: 0.0.0.0
+      APP_PORT: 4001
+    restart: unless-stopped

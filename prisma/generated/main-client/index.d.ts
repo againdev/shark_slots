@@ -106,6 +106,15 @@ export const X50Coeff: {
 export type X50Coeff = (typeof X50Coeff)[keyof typeof X50Coeff]
 
 
+export const Currency: {
+  USD: 'USD',
+  EUR: 'EUR',
+  UAH: 'UAH'
+};
+
+export type Currency = (typeof Currency)[keyof typeof Currency]
+
+
 export const Role: {
   USER: 'USER',
   YOUTUBER: 'YOUTUBER',
@@ -135,6 +144,10 @@ export const TournamentType: typeof $Enums.TournamentType
 export type X50Coeff = $Enums.X50Coeff
 
 export const X50Coeff: typeof $Enums.X50Coeff
+
+export type Currency = $Enums.Currency
+
+export const Currency: typeof $Enums.Currency
 
 export type Role = $Enums.Role
 
@@ -459,8 +472,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.17.1
-   * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
+   * Prisma Client JS version: 6.15.0
+   * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
    */
   export type PrismaVersion = {
     client: string
@@ -1989,10 +2002,6 @@ export namespace Prisma {
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
     /**
-     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
-     */
-    adapter?: runtime.SqlDriverAdapterFactory | null
-    /**
      * Global configuration for omitting model fields by default.
      * 
      * @example
@@ -2386,15 +2395,11 @@ export namespace Prisma {
     deposit: Decimal | null
     withdraw: Decimal | null
     balance: Decimal | null
+    currency: $Enums.Currency | null
     wager: Decimal | null
     rakeBackBalance: Decimal | null
     totalRakeBackAmount: Decimal | null
     hasClaimedTgBonus: boolean | null
-    everydayBonusClaimedAt: Date | null
-    dayRakeBackBonusValidTo: Date | null
-    weekRakeBackBonusValidTo: Date | null
-    monthRakeBackBonusValidTo: Date | null
-    vipMemberRakeBackBonus: boolean | null
     isActivateWelcomeBonus: boolean | null
     referalCode: string | null
     referralBalance: Decimal | null
@@ -2431,15 +2436,11 @@ export namespace Prisma {
     deposit: Decimal | null
     withdraw: Decimal | null
     balance: Decimal | null
+    currency: $Enums.Currency | null
     wager: Decimal | null
     rakeBackBalance: Decimal | null
     totalRakeBackAmount: Decimal | null
     hasClaimedTgBonus: boolean | null
-    everydayBonusClaimedAt: Date | null
-    dayRakeBackBonusValidTo: Date | null
-    weekRakeBackBonusValidTo: Date | null
-    monthRakeBackBonusValidTo: Date | null
-    vipMemberRakeBackBonus: boolean | null
     isActivateWelcomeBonus: boolean | null
     referalCode: string | null
     referralBalance: Decimal | null
@@ -2476,15 +2477,11 @@ export namespace Prisma {
     deposit: number
     withdraw: number
     balance: number
+    currency: number
     wager: number
     rakeBackBalance: number
     totalRakeBackAmount: number
     hasClaimedTgBonus: number
-    everydayBonusClaimedAt: number
-    dayRakeBackBonusValidTo: number
-    weekRakeBackBonusValidTo: number
-    monthRakeBackBonusValidTo: number
-    vipMemberRakeBackBonus: number
     isActivateWelcomeBonus: number
     referalCode: number
     referralBalance: number
@@ -2564,15 +2561,11 @@ export namespace Prisma {
     deposit?: true
     withdraw?: true
     balance?: true
+    currency?: true
     wager?: true
     rakeBackBalance?: true
     totalRakeBackAmount?: true
     hasClaimedTgBonus?: true
-    everydayBonusClaimedAt?: true
-    dayRakeBackBonusValidTo?: true
-    weekRakeBackBonusValidTo?: true
-    monthRakeBackBonusValidTo?: true
-    vipMemberRakeBackBonus?: true
     isActivateWelcomeBonus?: true
     referalCode?: true
     referralBalance?: true
@@ -2609,15 +2602,11 @@ export namespace Prisma {
     deposit?: true
     withdraw?: true
     balance?: true
+    currency?: true
     wager?: true
     rakeBackBalance?: true
     totalRakeBackAmount?: true
     hasClaimedTgBonus?: true
-    everydayBonusClaimedAt?: true
-    dayRakeBackBonusValidTo?: true
-    weekRakeBackBonusValidTo?: true
-    monthRakeBackBonusValidTo?: true
-    vipMemberRakeBackBonus?: true
     isActivateWelcomeBonus?: true
     referalCode?: true
     referralBalance?: true
@@ -2654,15 +2643,11 @@ export namespace Prisma {
     deposit?: true
     withdraw?: true
     balance?: true
+    currency?: true
     wager?: true
     rakeBackBalance?: true
     totalRakeBackAmount?: true
     hasClaimedTgBonus?: true
-    everydayBonusClaimedAt?: true
-    dayRakeBackBonusValidTo?: true
-    weekRakeBackBonusValidTo?: true
-    monthRakeBackBonusValidTo?: true
-    vipMemberRakeBackBonus?: true
     isActivateWelcomeBonus?: true
     referalCode?: true
     referralBalance?: true
@@ -2787,15 +2772,11 @@ export namespace Prisma {
     deposit: Decimal
     withdraw: Decimal
     balance: Decimal
+    currency: $Enums.Currency | null
     wager: Decimal
     rakeBackBalance: Decimal
     totalRakeBackAmount: Decimal
     hasClaimedTgBonus: boolean
-    everydayBonusClaimedAt: Date
-    dayRakeBackBonusValidTo: Date
-    weekRakeBackBonusValidTo: Date
-    monthRakeBackBonusValidTo: Date
-    vipMemberRakeBackBonus: boolean
     isActivateWelcomeBonus: boolean
     referalCode: string
     referralBalance: Decimal
@@ -2852,15 +2833,11 @@ export namespace Prisma {
     deposit?: boolean
     withdraw?: boolean
     balance?: boolean
+    currency?: boolean
     wager?: boolean
     rakeBackBalance?: boolean
     totalRakeBackAmount?: boolean
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: boolean
-    dayRakeBackBonusValidTo?: boolean
-    weekRakeBackBonusValidTo?: boolean
-    monthRakeBackBonusValidTo?: boolean
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode?: boolean
     referralBalance?: boolean
@@ -2910,15 +2887,11 @@ export namespace Prisma {
     deposit?: boolean
     withdraw?: boolean
     balance?: boolean
+    currency?: boolean
     wager?: boolean
     rakeBackBalance?: boolean
     totalRakeBackAmount?: boolean
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: boolean
-    dayRakeBackBonusValidTo?: boolean
-    weekRakeBackBonusValidTo?: boolean
-    monthRakeBackBonusValidTo?: boolean
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode?: boolean
     referralBalance?: boolean
@@ -2956,15 +2929,11 @@ export namespace Prisma {
     deposit?: boolean
     withdraw?: boolean
     balance?: boolean
+    currency?: boolean
     wager?: boolean
     rakeBackBalance?: boolean
     totalRakeBackAmount?: boolean
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: boolean
-    dayRakeBackBonusValidTo?: boolean
-    weekRakeBackBonusValidTo?: boolean
-    monthRakeBackBonusValidTo?: boolean
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode?: boolean
     referralBalance?: boolean
@@ -3002,15 +2971,11 @@ export namespace Prisma {
     deposit?: boolean
     withdraw?: boolean
     balance?: boolean
+    currency?: boolean
     wager?: boolean
     rakeBackBalance?: boolean
     totalRakeBackAmount?: boolean
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: boolean
-    dayRakeBackBonusValidTo?: boolean
-    weekRakeBackBonusValidTo?: boolean
-    monthRakeBackBonusValidTo?: boolean
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode?: boolean
     referralBalance?: boolean
@@ -3021,7 +2986,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "hashPassword" | "tgId" | "googleId" | "firstName" | "lastName" | "username" | "isPremium" | "languageCode" | "allowsWriteToPm" | "photoUrl" | "clientSeed" | "role" | "ban" | "registerIp" | "lastLoginIp" | "deviceHeight" | "deviceWidth" | "games" | "betSum" | "winSum" | "topWin" | "deposit" | "withdraw" | "balance" | "wager" | "rakeBackBalance" | "totalRakeBackAmount" | "hasClaimedTgBonus" | "everydayBonusClaimedAt" | "dayRakeBackBonusValidTo" | "weekRakeBackBonusValidTo" | "monthRakeBackBonusValidTo" | "vipMemberRakeBackBonus" | "isActivateWelcomeBonus" | "referalCode" | "referralBalance" | "revSharePercent" | "bonusForReferral" | "claimedRankBonuses" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "hashPassword" | "tgId" | "googleId" | "firstName" | "lastName" | "username" | "isPremium" | "languageCode" | "allowsWriteToPm" | "photoUrl" | "clientSeed" | "role" | "ban" | "registerIp" | "lastLoginIp" | "deviceHeight" | "deviceWidth" | "games" | "betSum" | "winSum" | "topWin" | "deposit" | "withdraw" | "balance" | "currency" | "wager" | "rakeBackBalance" | "totalRakeBackAmount" | "hasClaimedTgBonus" | "isActivateWelcomeBonus" | "referalCode" | "referralBalance" | "revSharePercent" | "bonusForReferral" | "claimedRankBonuses" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     referal?: boolean | User$referalArgs<ExtArgs>
     userReferals?: boolean | User$userReferalsArgs<ExtArgs>
@@ -3081,15 +3046,11 @@ export namespace Prisma {
       deposit: Prisma.Decimal
       withdraw: Prisma.Decimal
       balance: Prisma.Decimal
+      currency: $Enums.Currency | null
       wager: Prisma.Decimal
       rakeBackBalance: Prisma.Decimal
       totalRakeBackAmount: Prisma.Decimal
       hasClaimedTgBonus: boolean
-      everydayBonusClaimedAt: Date
-      dayRakeBackBonusValidTo: Date
-      weekRakeBackBonusValidTo: Date
-      monthRakeBackBonusValidTo: Date
-      vipMemberRakeBackBonus: boolean
       isActivateWelcomeBonus: boolean
       referalCode: string
       referralBalance: Prisma.Decimal
@@ -3558,15 +3519,11 @@ export namespace Prisma {
     readonly deposit: FieldRef<"User", 'Decimal'>
     readonly withdraw: FieldRef<"User", 'Decimal'>
     readonly balance: FieldRef<"User", 'Decimal'>
+    readonly currency: FieldRef<"User", 'Currency'>
     readonly wager: FieldRef<"User", 'Decimal'>
     readonly rakeBackBalance: FieldRef<"User", 'Decimal'>
     readonly totalRakeBackAmount: FieldRef<"User", 'Decimal'>
     readonly hasClaimedTgBonus: FieldRef<"User", 'Boolean'>
-    readonly everydayBonusClaimedAt: FieldRef<"User", 'DateTime'>
-    readonly dayRakeBackBonusValidTo: FieldRef<"User", 'DateTime'>
-    readonly weekRakeBackBonusValidTo: FieldRef<"User", 'DateTime'>
-    readonly monthRakeBackBonusValidTo: FieldRef<"User", 'DateTime'>
-    readonly vipMemberRakeBackBonus: FieldRef<"User", 'Boolean'>
     readonly isActivateWelcomeBonus: FieldRef<"User", 'Boolean'>
     readonly referalCode: FieldRef<"User", 'String'>
     readonly referralBalance: FieldRef<"User", 'Decimal'>
@@ -19647,15 +19604,11 @@ export namespace Prisma {
     deposit: 'deposit',
     withdraw: 'withdraw',
     balance: 'balance',
+    currency: 'currency',
     wager: 'wager',
     rakeBackBalance: 'rakeBackBalance',
     totalRakeBackAmount: 'totalRakeBackAmount',
     hasClaimedTgBonus: 'hasClaimedTgBonus',
-    everydayBonusClaimedAt: 'everydayBonusClaimedAt',
-    dayRakeBackBonusValidTo: 'dayRakeBackBonusValidTo',
-    weekRakeBackBonusValidTo: 'weekRakeBackBonusValidTo',
-    monthRakeBackBonusValidTo: 'monthRakeBackBonusValidTo',
-    vipMemberRakeBackBonus: 'vipMemberRakeBackBonus',
     isActivateWelcomeBonus: 'isActivateWelcomeBonus',
     referalCode: 'referalCode',
     referralBalance: 'referralBalance',
@@ -19997,6 +19950,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Currency'
+   */
+  export type EnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency'>
+    
+
+
+  /**
+   * Reference to a field of type 'Currency[]'
+   */
+  export type ListEnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -20099,15 +20066,11 @@ export namespace Prisma {
     deposit?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     balance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
+    currency?: EnumCurrencyNullableFilter<"User"> | $Enums.Currency | null
     wager?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFilter<"User"> | boolean
-    everydayBonusClaimedAt?: DateTimeFilter<"User"> | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    vipMemberRakeBackBonus?: BoolFilter<"User"> | boolean
     isActivateWelcomeBonus?: BoolFilter<"User"> | boolean
     referalCode?: StringFilter<"User"> | string
     referralBalance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
@@ -20156,15 +20119,11 @@ export namespace Prisma {
     deposit?: SortOrder
     withdraw?: SortOrder
     balance?: SortOrder
+    currency?: SortOrderInput | SortOrder
     wager?: SortOrder
     rakeBackBalance?: SortOrder
     totalRakeBackAmount?: SortOrder
     hasClaimedTgBonus?: SortOrder
-    everydayBonusClaimedAt?: SortOrder
-    dayRakeBackBonusValidTo?: SortOrder
-    weekRakeBackBonusValidTo?: SortOrder
-    monthRakeBackBonusValidTo?: SortOrder
-    vipMemberRakeBackBonus?: SortOrder
     isActivateWelcomeBonus?: SortOrder
     referalCode?: SortOrder
     referralBalance?: SortOrder
@@ -20217,15 +20176,11 @@ export namespace Prisma {
     deposit?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     balance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
+    currency?: EnumCurrencyNullableFilter<"User"> | $Enums.Currency | null
     wager?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFilter<"User"> | boolean
-    everydayBonusClaimedAt?: DateTimeFilter<"User"> | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    vipMemberRakeBackBonus?: BoolFilter<"User"> | boolean
     isActivateWelcomeBonus?: BoolFilter<"User"> | boolean
     referralBalance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     revSharePercent?: IntFilter<"User"> | number
@@ -20273,15 +20228,11 @@ export namespace Prisma {
     deposit?: SortOrder
     withdraw?: SortOrder
     balance?: SortOrder
+    currency?: SortOrderInput | SortOrder
     wager?: SortOrder
     rakeBackBalance?: SortOrder
     totalRakeBackAmount?: SortOrder
     hasClaimedTgBonus?: SortOrder
-    everydayBonusClaimedAt?: SortOrder
-    dayRakeBackBonusValidTo?: SortOrder
-    weekRakeBackBonusValidTo?: SortOrder
-    monthRakeBackBonusValidTo?: SortOrder
-    vipMemberRakeBackBonus?: SortOrder
     isActivateWelcomeBonus?: SortOrder
     referalCode?: SortOrder
     referralBalance?: SortOrder
@@ -20327,15 +20278,11 @@ export namespace Prisma {
     deposit?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
     balance?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
+    currency?: EnumCurrencyNullableWithAggregatesFilter<"User"> | $Enums.Currency | null
     wager?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolWithAggregatesFilter<"User"> | boolean
-    everydayBonusClaimedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    dayRakeBackBonusValidTo?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    weekRakeBackBonusValidTo?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    monthRakeBackBonusValidTo?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    vipMemberRakeBackBonus?: BoolWithAggregatesFilter<"User"> | boolean
     isActivateWelcomeBonus?: BoolWithAggregatesFilter<"User"> | boolean
     referalCode?: StringWithAggregatesFilter<"User"> | string
     referralBalance?: DecimalWithAggregatesFilter<"User"> | Decimal | DecimalJsLike | number | string
@@ -21511,15 +21458,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -21568,15 +21511,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -21625,15 +21564,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -21682,15 +21617,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -21739,15 +21670,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -21785,15 +21712,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -21831,15 +21754,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -23224,6 +23143,21 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type EnumCurrencyNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCurrencyNullableFilter<$PrismaModel> | $Enums.Currency | null
+  }
+
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -23233,14 +23167,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type IntNullableListFilter<$PrismaModel = never> = {
-    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    has?: number | IntFieldRefInput<$PrismaModel> | null
-    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
-    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
   }
 
   export type ReferalNullableScalarRelationFilter = {
@@ -23380,15 +23306,11 @@ export namespace Prisma {
     deposit?: SortOrder
     withdraw?: SortOrder
     balance?: SortOrder
+    currency?: SortOrder
     wager?: SortOrder
     rakeBackBalance?: SortOrder
     totalRakeBackAmount?: SortOrder
     hasClaimedTgBonus?: SortOrder
-    everydayBonusClaimedAt?: SortOrder
-    dayRakeBackBonusValidTo?: SortOrder
-    weekRakeBackBonusValidTo?: SortOrder
-    monthRakeBackBonusValidTo?: SortOrder
-    vipMemberRakeBackBonus?: SortOrder
     isActivateWelcomeBonus?: SortOrder
     referalCode?: SortOrder
     referralBalance?: SortOrder
@@ -23446,15 +23368,11 @@ export namespace Prisma {
     deposit?: SortOrder
     withdraw?: SortOrder
     balance?: SortOrder
+    currency?: SortOrder
     wager?: SortOrder
     rakeBackBalance?: SortOrder
     totalRakeBackAmount?: SortOrder
     hasClaimedTgBonus?: SortOrder
-    everydayBonusClaimedAt?: SortOrder
-    dayRakeBackBonusValidTo?: SortOrder
-    weekRakeBackBonusValidTo?: SortOrder
-    monthRakeBackBonusValidTo?: SortOrder
-    vipMemberRakeBackBonus?: SortOrder
     isActivateWelcomeBonus?: SortOrder
     referalCode?: SortOrder
     referralBalance?: SortOrder
@@ -23491,15 +23409,11 @@ export namespace Prisma {
     deposit?: SortOrder
     withdraw?: SortOrder
     balance?: SortOrder
+    currency?: SortOrder
     wager?: SortOrder
     rakeBackBalance?: SortOrder
     totalRakeBackAmount?: SortOrder
     hasClaimedTgBonus?: SortOrder
-    everydayBonusClaimedAt?: SortOrder
-    dayRakeBackBonusValidTo?: SortOrder
-    weekRakeBackBonusValidTo?: SortOrder
-    monthRakeBackBonusValidTo?: SortOrder
-    vipMemberRakeBackBonus?: SortOrder
     isActivateWelcomeBonus?: SortOrder
     referalCode?: SortOrder
     referralBalance?: SortOrder
@@ -23668,6 +23582,16 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type EnumCurrencyNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCurrencyNullableWithAggregatesFilter<$PrismaModel> | $Enums.Currency | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCurrencyNullableFilter<$PrismaModel>
+    _max?: NestedEnumCurrencyNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -24835,13 +24759,17 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type NullableEnumCurrencyFieldUpdateOperationsInput = {
+    set?: $Enums.Currency | null
   }
 
   export type UserUpdateclaimedRankBonusesInput = {
     set?: number[]
     push?: number | number[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type ReferalUpdateOneWithoutUserNestedInput = {
@@ -25599,6 +25527,13 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type NestedEnumCurrencyNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCurrencyNullableFilter<$PrismaModel> | $Enums.Currency | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -25768,6 +25703,16 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCurrencyNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCurrencyNullableWithAggregatesFilter<$PrismaModel> | $Enums.Currency | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCurrencyNullableFilter<$PrismaModel>
+    _max?: NestedEnumCurrencyNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -26752,15 +26697,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -26808,15 +26749,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -26880,15 +26817,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -26936,15 +26869,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -26992,15 +26921,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27048,15 +26973,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27120,15 +27041,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27176,15 +27093,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27232,15 +27145,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27288,15 +27197,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27360,15 +27265,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27416,15 +27317,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27472,15 +27369,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27528,15 +27421,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27589,15 +27478,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27645,15 +27530,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -27717,15 +27598,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27773,15 +27650,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27840,15 +27713,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27896,15 +27765,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -27999,15 +27864,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28055,15 +27916,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28188,15 +28045,11 @@ export namespace Prisma {
     deposit?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     balance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
+    currency?: EnumCurrencyNullableFilter<"User"> | $Enums.Currency | null
     wager?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFilter<"User"> | boolean
-    everydayBonusClaimedAt?: DateTimeFilter<"User"> | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFilter<"User"> | Date | string
-    vipMemberRakeBackBonus?: BoolFilter<"User"> | boolean
     isActivateWelcomeBonus?: BoolFilter<"User"> | boolean
     referalCode?: StringFilter<"User"> | string
     referralBalance?: DecimalFilter<"User"> | Decimal | DecimalJsLike | number | string
@@ -28234,15 +28087,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28290,15 +28139,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28362,15 +28207,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -28418,15 +28259,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -28474,15 +28311,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28530,15 +28363,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28602,15 +28431,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -28658,15 +28483,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -28754,15 +28575,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28810,15 +28627,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -28898,15 +28711,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -28954,15 +28763,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -29010,15 +28815,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -29066,15 +28867,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -29138,15 +28935,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -29194,15 +28987,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -29296,15 +29085,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -29352,15 +29137,11 @@ export namespace Prisma {
     deposit?: Decimal | DecimalJsLike | number | string
     withdraw?: Decimal | DecimalJsLike | number | string
     balance?: Decimal | DecimalJsLike | number | string
+    currency?: $Enums.Currency | null
     wager?: Decimal | DecimalJsLike | number | string
     rakeBackBalance?: Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: boolean
-    everydayBonusClaimedAt?: Date | string
-    dayRakeBackBonusValidTo?: Date | string
-    weekRakeBackBonusValidTo?: Date | string
-    monthRakeBackBonusValidTo?: Date | string
-    vipMemberRakeBackBonus?: boolean
     isActivateWelcomeBonus?: boolean
     referalCode: string
     referralBalance?: Decimal | DecimalJsLike | number | string
@@ -29451,15 +29232,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -29507,15 +29284,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -30139,15 +29912,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -30195,15 +29964,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -30251,15 +30016,11 @@ export namespace Prisma {
     deposit?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     withdraw?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: NullableEnumCurrencyFieldUpdateOperationsInput | $Enums.Currency | null
     wager?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     rakeBackBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     totalRakeBackAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     hasClaimedTgBonus?: BoolFieldUpdateOperationsInput | boolean
-    everydayBonusClaimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    dayRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    weekRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    monthRakeBackBonusValidTo?: DateTimeFieldUpdateOperationsInput | Date | string
-    vipMemberRakeBackBonus?: BoolFieldUpdateOperationsInput | boolean
     isActivateWelcomeBonus?: BoolFieldUpdateOperationsInput | boolean
     referalCode?: StringFieldUpdateOperationsInput | string
     referralBalance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string

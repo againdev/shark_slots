@@ -5,28 +5,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientInitializationError,
-  PrismaClientValidationError,
-  getPrismaClient,
-  sqltag,
-  empty,
-  join,
-  raw,
-  skip,
   Decimal,
-  Debug,
   objectEnumValues,
   makeStrictEnum,
-  Extensions,
-  warnOnce,
-  defineDmmfProperty,
   Public,
   getRuntime,
-  createParam,
-} = require('./runtime/wasm-engine-edge.js')
+  skip
+} = require('./runtime/index-browser.js')
 
 
 const Prisma = {}
@@ -35,35 +20,79 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.17.1
- * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.17.1",
-  engine: "272a37d34178c2894197e17273bf937f25acdeac"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
-Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
-Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
-Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
-Prisma.PrismaClientInitializationError = PrismaClientInitializationError
-Prisma.PrismaClientValidationError = PrismaClientValidationError
+Prisma.PrismaClientKnownRequestError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)};
+Prisma.PrismaClientUnknownRequestError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.PrismaClientRustPanicError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.PrismaClientInitializationError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.PrismaClientValidationError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
 Prisma.Decimal = Decimal
 
 /**
  * Re-export of sql-template-tag
  */
-Prisma.sql = sqltag
-Prisma.empty = empty
-Prisma.join = join
-Prisma.raw = raw
+Prisma.sql = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.empty = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.join = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.raw = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
 Prisma.validator = Public.validator
 
 /**
 * Extensions
 */
-Prisma.getExtensionContext = Extensions.getExtensionContext
-Prisma.defineExtension = Extensions.defineExtension
+Prisma.getExtensionContext = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.defineExtension = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
 
 /**
  * Shorthand utilities for JSON filtering
@@ -80,11 +109,10 @@ Prisma.NullTypes = {
 
 
 
-
-
 /**
  * Enums
  */
+
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
@@ -119,15 +147,11 @@ exports.Prisma.UserScalarFieldEnum = {
   deposit: 'deposit',
   withdraw: 'withdraw',
   balance: 'balance',
+  currency: 'currency',
   wager: 'wager',
   rakeBackBalance: 'rakeBackBalance',
   totalRakeBackAmount: 'totalRakeBackAmount',
   hasClaimedTgBonus: 'hasClaimedTgBonus',
-  everydayBonusClaimedAt: 'everydayBonusClaimedAt',
-  dayRakeBackBonusValidTo: 'dayRakeBackBonusValidTo',
-  weekRakeBackBonusValidTo: 'weekRakeBackBonusValidTo',
-  monthRakeBackBonusValidTo: 'monthRakeBackBonusValidTo',
-  vipMemberRakeBackBonus: 'vipMemberRakeBackBonus',
   isActivateWelcomeBonus: 'isActivateWelcomeBonus',
   referalCode: 'referalCode',
   referralBalance: 'referralBalance',
@@ -334,9 +358,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.TournamentType = exports.$Enums.TournamentType = {
-  REFERRAL: 'REFERRAL',
-  GAME: 'GAME'
+exports.Role = exports.$Enums.Role = {
+  USER: 'USER',
+  YOUTUBER: 'YOUTUBER',
+  ADMIN: 'ADMIN'
+};
+
+exports.Currency = exports.$Enums.Currency = {
+  USD: 'USD',
+  EUR: 'EUR',
+  UAH: 'UAH'
 };
 
 exports.X50Coeff = exports.$Enums.X50Coeff = {
@@ -346,12 +377,6 @@ exports.X50Coeff = exports.$Enums.X50Coeff = {
   X50: 'X50'
 };
 
-exports.Role = exports.$Enums.Role = {
-  USER: 'USER',
-  YOUTUBER: 'YOUTUBER',
-  ADMIN: 'ADMIN'
-};
-
 exports.PaymentSystem = exports.$Enums.PaymentSystem = {
   EXNODEPAY: 'EXNODEPAY',
   CRYPTO_BOT: 'CRYPTO_BOT',
@@ -359,6 +384,11 @@ exports.PaymentSystem = exports.$Enums.PaymentSystem = {
   STREAMPAY: 'STREAMPAY',
   REPAY: 'REPAY',
   NIRVANA: 'NIRVANA'
+};
+
+exports.TournamentType = exports.$Enums.TournamentType = {
+  REFERRAL: 'REFERRAL',
+  GAME: 'GAME'
 };
 
 exports.Prisma.ModelName = {
@@ -377,89 +407,34 @@ exports.Prisma.ModelName = {
   TournamentWinner: 'TournamentWinner',
   SlotsMobule: 'SlotsMobule'
 };
+
 /**
- * Create the Client
+ * This is a stub Prisma Client that will error at runtime if called.
  */
-const config = {
-  "generator": {
-    "name": "client",
-    "provider": {
-      "fromEnvVar": null,
-      "value": "prisma-client-js"
-    },
-    "output": {
-      "value": "/Users/dev/Desktop/projects/backend/hi_roll_slots/prisma/generated/main-client",
-      "fromEnvVar": null
-    },
-    "config": {
-      "engineType": "library"
-    },
-    "binaryTargets": [
-      {
-        "fromEnvVar": null,
-        "value": "darwin-arm64",
-        "native": true
-      },
-      {
-        "fromEnvVar": null,
-        "value": "linux-musl"
-      },
-      {
-        "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x"
-      }
-    ],
-    "previewFeatures": [],
-    "sourceFilePath": "/Users/dev/Desktop/projects/backend/hi_roll_slots/prisma/main/schema.prisma",
-    "isCustomOutput": true
-  },
-  "relativeEnvPaths": {
-    "rootEnvPath": null
-  },
-  "relativePath": "../../main",
-  "clientVersion": "6.17.1",
-  "engineVersion": "272a37d34178c2894197e17273bf937f25acdeac",
-  "datasourceNames": [
-    "db"
-  ],
-  "activeProvider": "postgresql",
-  "inlineDatasources": {
-    "db": {
-      "url": {
-        "fromEnvVar": "MAIN_DATABASE_URL",
-        "value": null
-      }
-    }
-  },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"linux-musl\", \"debian-openssl-3.0.x\"]\n  output        = \"../generated/main-client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"MAIN_DATABASE_URL\")\n}\n\nmodel User {\n  id              String   @id @default(uuid()) @db.Uuid\n  email           String?  @unique\n  hashPassword    String?\n  tgId            BigInt?  @unique\n  googleId        String?  @unique\n  firstName       String\n  lastName        String?\n  username        String?\n  isPremium       Boolean? @default(false)\n  languageCode    String?\n  allowsWriteToPm Boolean? @default(false)\n  photoUrl        String?\n  clientSeed      String   @unique\n  role            Role     @default(USER)\n  ban             Boolean  @default(false)\n\n  registerIp   String\n  lastLoginIp  String\n  deviceHeight Int?\n  deviceWidth  Int?\n\n  games    Int     @default(0)\n  betSum   Decimal @default(0.0) @db.Decimal(10, 4)\n  winSum   Decimal @default(0.0) @db.Decimal(10, 4)\n  topWin   Decimal @default(0.0) @db.Decimal(10, 4)\n  deposit  Decimal @default(0.0) @db.Decimal(10, 4)\n  withdraw Decimal @default(0.0) @db.Decimal(10, 4)\n  balance  Decimal @default(0.0) @db.Decimal(10, 4)\n  wager    Decimal @default(0.0) @db.Decimal(10, 4)\n\n  rakeBackBalance           Decimal  @default(0.0) @db.Decimal(10, 6)\n  totalRakeBackAmount       Decimal  @default(0.0) @db.Decimal(10, 6)\n  hasClaimedTgBonus         Boolean  @default(false)\n  everydayBonusClaimedAt    DateTime @default(now())\n  dayRakeBackBonusValidTo   DateTime @default(now())\n  weekRakeBackBonusValidTo  DateTime @default(now())\n  monthRakeBackBonusValidTo DateTime @default(now())\n  vipMemberRakeBackBonus    Boolean  @default(false)\n  isActivateWelcomeBonus    Boolean  @default(false)\n\n  referalCode        String    @unique\n  referal            Referal?  @relation(\"ReferalUser\")\n  userReferals       Referal[] @relation(\"UserReferal\")\n  referralBalance    Decimal   @default(0.0) @db.Decimal(10, 4)\n  revSharePercent    Int       @default(20)\n  bonusForReferral   Decimal   @default(0.2) @db.Decimal(10, 2)\n  claimedRankBonuses Int[]\n\n  promocodes Promocode[] @relation(\"UserPromocodes\")\n  partners   Partner[]   @relation(\"UserPartner\")\n\n  x50       X50[]      @relation(\"UserX50\")\n  mines     Mines[]    @relation(\"UserMines\")\n  dice      Dice[]     @relation(\"UserDice\")\n  freespins Freespin[] @relation(\"UserFreespin\")\n\n  deposits  Deposit[]  @relation(\"UserDeposit\")\n  withdraws Withdraw[] @relation(\"UserWithdraw\")\n\n  createdAt        DateTime           @default(now())\n  updatedAt        DateTime           @updatedAt\n  TournamentWinner TournamentWinner[]\n\n  @@index([id, tgId, isPremium])\n}\n\nmodel X50 {\n  id         String    @id @db.Uuid\n  roundId    BigInt\n  betSum     Decimal?  @db.Decimal(10, 4)\n  winSum     Decimal?  @db.Decimal(10, 4)\n  isWin      Boolean   @default(false)\n  userId     String?   @db.Uuid\n  betCoeff   X50Coeff?\n  lotto      BigInt\n  serverSeed String\n  winCoeff   X50Coeff\n  winIndex   Int\n  user       User?     @relation(\"UserX50\", fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  hasBets   Boolean  @default(false)\n\n  @@index([id, userId, betCoeff, winCoeff, roundId])\n}\n\nmodel Mines {\n  id            BigInt   @id\n  clientSeed    String\n  serverSeed    String\n  betSum        Decimal  @db.Decimal(10, 4)\n  winSum        Decimal? @db.Decimal(10, 4)\n  minesNum      Int\n  stepNumber    Int      @default(0)\n  multiplier    Decimal  @default(1.0) @db.Decimal(10, 2)\n  isWin         Boolean  @default(false)\n  isFinished    Boolean  @default(false)\n  minesPosition Int[]\n  userSteps     Int[]    @default([])\n\n  userId String @db.Uuid\n  user   User   @relation(\"UserMines\", fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([id, userId])\n}\n\nmodel Dice {\n  id         BigInt  @id\n  clientSeed String\n  serverSeed String\n  betSum     Decimal @db.Decimal(10, 4)\n  winSum     Decimal @db.Decimal(10, 4)\n  payout     Decimal @db.Decimal(10, 2)\n  isWin      Boolean\n  minBetNum  Decimal @db.Decimal(10, 2)\n  maxBetNum  Decimal @db.Decimal(10, 2)\n  winNum     Decimal @db.Decimal(10, 2)\n\n  userId String @db.Uuid\n  user   User   @relation(\"UserDice\", fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n\n  @@index([id, userId])\n}\n\nmodel ServerSeedHistory {\n  id         String    @id @default(uuid()) @db.Uuid\n  serverSeed String\n  lotto      BigInt\n  validFrom  DateTime  @default(now())\n  validTo    DateTime?\n  createdAt  DateTime  @default(now())\n}\n\nmodel Referal {\n  id String @id @default(uuid()) @db.Uuid\n\n  userId            String  @unique @db.Uuid\n  user              User    @relation(\"ReferalUser\", fields: [userId], references: [id])\n  tgId              BigInt? @unique\n  hasClaimedTgBonus Boolean @default(false)\n  deposit           Decimal @default(0.0) @db.Decimal(10, 4)\n  profitFromUser    Decimal @default(0.0) @db.Decimal(10, 4)\n\n  referralId String @db.Uuid\n  referal    User   @relation(\"UserReferal\", fields: [referralId], references: [id])\n\n  createdAt DateTime @default(now())\n}\n\nmodel Promocode {\n  id        String   @id @default(uuid()) @db.Uuid\n  promocode String   @unique\n  amount    Decimal? @db.Decimal(10, 2)\n  activated Int      @default(0)\n  activates Int\n\n  isFreeSpins Boolean @default(false)\n  gameId      Int?\n  count       Int?\n  betLevel    Int?    @default(1)\n  rate        Int?    @default(1)\n\n  partnerId String?  @db.Uuid\n  partner   Partner? @relation(fields: [partnerId], references: [id])\n  users     User[]   @relation(\"UserPromocodes\")\n\n  createdAt DateTime @default(now())\n}\n\nmodel Deposit {\n  id String @id @default(uuid()) @db.Uuid\n\n  amount        Decimal       @default(0.0) @db.Decimal(10, 2)\n  tokenName     String\n  paymentSystem PaymentSystem\n\n  status    String\n  trackerId String @unique\n  receiver  String\n\n  userId String @db.Uuid\n  user   User   @relation(\"UserDeposit\", fields: [userId], references: [id])\n\n  dateExpire DateTime\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n\n  @@index([id, userId])\n}\n\nmodel Withdraw {\n  id String @id @default(uuid()) @db.Uuid\n\n  amount         Decimal       @db.Decimal(10, 2)\n  chainComission Decimal       @db.Decimal(10, 2)\n  tokenName      String\n  paymentSystem  PaymentSystem\n\n  status    String\n  trackerId String? @unique\n  receiver  String\n\n  userId String @db.Uuid\n  user   User   @relation(\"UserWithdraw\", fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([id, userId])\n}\n\nmodel Partner {\n  id String @id @default(uuid()) @db.Uuid\n\n  platform              String\n  channelLink           String\n  channelName           String\n  numberOfSubscribers   Int\n  additionalInformation String?\n  contact               String\n\n  status    String?\n  amount    Decimal? @db.Decimal(10, 2)\n  activates Int\n\n  isFreeSpins Boolean @default(false)\n  gameId      Int?\n  count       Int?\n  betLevel    Int?    @default(1)\n  rate        Int?    @default(1)\n\n  promocodes Promocode[]\n  userId     String      @db.Uuid\n  user       User        @relation(\"UserPartner\", fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([id, userId])\n}\n\nmodel Freespin {\n  id String @id @default(uuid()) @db.Uuid\n\n  gameId   Int\n  count    Int\n  status   Int     @default(0)\n  betLevel Int     @default(1)\n  rate     Int     @default(1)\n  isPromo  Boolean\n  userId   String  @db.Uuid\n  user     User    @relation(\"UserFreespin\", fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([id, userId])\n}\n\nmodel Tournament {\n  id        String             @id @default(uuid()) @db.Uuid\n  type      TournamentType\n  startDate DateTime\n  endDate   DateTime\n  isActive  Boolean            @default(true)\n  prizes    Decimal[]          @db.Decimal(10, 2)\n  winners   TournamentWinner[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([type, isActive, endDate])\n}\n\nmodel TournamentWinner {\n  id           String     @id @default(uuid()) @db.Uuid\n  userId       String     @db.Uuid\n  tournamentId String     @db.Uuid\n  prizeAmount  Decimal    @db.Decimal(10, 2)\n  rank         Int\n  score        Int\n  user         User       @relation(fields: [userId], references: [id])\n  tournament   Tournament @relation(fields: [tournamentId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([tournamentId, rank])\n  @@index([userId, tournamentId])\n}\n\nenum TournamentType {\n  REFERRAL\n  GAME\n}\n\nenum X50Coeff {\n  X2\n  X3\n  X5\n  X50\n}\n\nenum Role {\n  USER\n  YOUTUBER\n  ADMIN\n}\n\nenum PaymentSystem {\n  EXNODEPAY\n  CRYPTO_BOT\n  FK\n  STREAMPAY\n  REPAY\n  NIRVANA\n}\n\nmodel SlotsMobule {\n  id          Int     @id @default(autoincrement())\n  game_id     Int\n  title       String? @db.VarChar(44)\n  alias       String? @db.VarChar(32)\n  provider    String? @db.VarChar(10)\n  show        Int\n  category_id String? @db.VarChar(2)\n  is_live     Int\n  priority    Int\n  created_at  String? @db.VarChar(19)\n  updated_at  String? @db.VarChar(19)\n\n  @@map(\"slotsmobule\")\n}\n",
-  "inlineSchemaHash": "0547068defa8389785d9123408eaa03ea079205a561f1aceed87d77f7a19c507",
-  "copyEngine": true
-}
-config.dirname = '/'
+class PrismaClient {
+  constructor() {
+    return new Proxy(this, {
+      get(target, prop) {
+        let message
+        const runtime = getRuntime()
+        if (runtime.isEdge) {
+          message = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
+- Use Prisma Accelerate: https://pris.ly/d/accelerate
+- Use Driver Adapters: https://pris.ly/d/driver-adapters
+`;
+        } else {
+          message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
+        }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hashPassword\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tgId\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"googleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isPremium\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"languageCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"allowsWriteToPm\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"photoUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"clientSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"ban\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"registerIp\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastLoginIp\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"deviceHeight\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"deviceWidth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"games\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"betSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"winSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"topWin\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"deposit\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"withdraw\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"balance\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"wager\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"rakeBackBalance\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"totalRakeBackAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"hasClaimedTgBonus\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"everydayBonusClaimedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"dayRakeBackBonusValidTo\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"weekRakeBackBonusValidTo\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monthRakeBackBonusValidTo\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"vipMemberRakeBackBonus\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isActivateWelcomeBonus\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"referalCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"referal\",\"kind\":\"object\",\"type\":\"Referal\",\"relationName\":\"ReferalUser\"},{\"name\":\"userReferals\",\"kind\":\"object\",\"type\":\"Referal\",\"relationName\":\"UserReferal\"},{\"name\":\"referralBalance\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"revSharePercent\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"bonusForReferral\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"claimedRankBonuses\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"promocodes\",\"kind\":\"object\",\"type\":\"Promocode\",\"relationName\":\"UserPromocodes\"},{\"name\":\"partners\",\"kind\":\"object\",\"type\":\"Partner\",\"relationName\":\"UserPartner\"},{\"name\":\"x50\",\"kind\":\"object\",\"type\":\"X50\",\"relationName\":\"UserX50\"},{\"name\":\"mines\",\"kind\":\"object\",\"type\":\"Mines\",\"relationName\":\"UserMines\"},{\"name\":\"dice\",\"kind\":\"object\",\"type\":\"Dice\",\"relationName\":\"UserDice\"},{\"name\":\"freespins\",\"kind\":\"object\",\"type\":\"Freespin\",\"relationName\":\"UserFreespin\"},{\"name\":\"deposits\",\"kind\":\"object\",\"type\":\"Deposit\",\"relationName\":\"UserDeposit\"},{\"name\":\"withdraws\",\"kind\":\"object\",\"type\":\"Withdraw\",\"relationName\":\"UserWithdraw\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"TournamentWinner\",\"kind\":\"object\",\"type\":\"TournamentWinner\",\"relationName\":\"TournamentWinnerToUser\"}],\"dbName\":null},\"X50\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"roundId\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"betSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"winSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"isWin\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"betCoeff\",\"kind\":\"enum\",\"type\":\"X50Coeff\"},{\"name\":\"lotto\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"serverSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"winCoeff\",\"kind\":\"enum\",\"type\":\"X50Coeff\"},{\"name\":\"winIndex\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserX50\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"hasBets\",\"kind\":\"scalar\",\"type\":\"Boolean\"}],\"dbName\":null},\"Mines\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"clientSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serverSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"betSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"winSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"minesNum\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"stepNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"multiplier\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"isWin\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isFinished\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"minesPosition\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userSteps\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserMines\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Dice\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"clientSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serverSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"betSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"winSum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"payout\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"isWin\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"minBetNum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"maxBetNum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"winNum\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserDice\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"ServerSeedHistory\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serverSeed\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lotto\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"validFrom\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"validTo\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Referal\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ReferalUser\"},{\"name\":\"tgId\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"hasClaimedTgBonus\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"deposit\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"profitFromUser\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"referralId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"referal\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserReferal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Promocode\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"promocode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"activated\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"activates\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isFreeSpins\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"gameId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"count\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"betLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rate\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"partnerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"partner\",\"kind\":\"object\",\"type\":\"Partner\",\"relationName\":\"PartnerToPromocode\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserPromocodes\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Deposit\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"tokenName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paymentSystem\",\"kind\":\"enum\",\"type\":\"PaymentSystem\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiver\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserDeposit\"},{\"name\":\"dateExpire\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Withdraw\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"chainComission\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"tokenName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paymentSystem\",\"kind\":\"enum\",\"type\":\"PaymentSystem\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiver\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserWithdraw\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Partner\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"platform\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"channelLink\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"channelName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"numberOfSubscribers\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"additionalInformation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"activates\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isFreeSpins\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"gameId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"count\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"betLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rate\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"promocodes\",\"kind\":\"object\",\"type\":\"Promocode\",\"relationName\":\"PartnerToPromocode\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserPartner\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Freespin\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gameId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"count\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"betLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rate\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isPromo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserFreespin\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Tournament\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TournamentType\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"prizes\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"winners\",\"kind\":\"object\",\"type\":\"TournamentWinner\",\"relationName\":\"TournamentToTournamentWinner\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TournamentWinner\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tournamentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prizeAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"rank\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TournamentWinnerToUser\"},{\"name\":\"tournament\",\"kind\":\"object\",\"type\":\"Tournament\",\"relationName\":\"TournamentToTournamentWinner\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"SlotsMobule\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"game_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"alias\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"show\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"category_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_live\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"priority\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":\"slotsmobule\"}},\"enums\":{},\"types\":{}}")
-defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
-config.engineWasm = {
-  getRuntime: async () => require('./query_engine_bg.js'),
-  getQueryEngineWasmModule: async () => {
-    const loader = (await import('#wasm-engine-loader')).default
-    const engine = (await loader).default
-    return engine
+        message += `
+If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
+
+        throw new Error(message)
+      }
+    })
   }
 }
-config.compilerWasm = undefined
 
-config.injectableEdgeEnv = () => ({
-  parsed: {
-    MAIN_DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['MAIN_DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.MAIN_DATABASE_URL || undefined
-  }
-})
-
-if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
-  Debug.enable(typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined)
-}
-
-const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
-Object.assign(exports, Prisma)
 
+Object.assign(exports, Prisma)

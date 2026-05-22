@@ -28,6 +28,15 @@ import {
   validatePartnerAlias,
 } from './mobule.helpers';
 
+const MOBULE_METHODS_REQUIRING_MAIN_DB = new Set([
+  'check.session',
+  'check.balance',
+  'withdraw.bet',
+  'deposit.win',
+  'freerounds.activate',
+  'freerounds.complete',
+]);
+
 const USER_SESSION_SELECT = {
   id: true,
   balance: true,
@@ -78,6 +87,17 @@ export class MobuleService implements OnModuleInit {
     const ip = this.getIp(req);
     if (!this.allowedIps.includes(ip)) {
       throw new ForbiddenException('Error check ip!');
+    }
+
+    if (
+      MOBULE_METHODS_REQUIRING_MAIN_DB.has(method) &&
+      !this.mainPrismaService.isConnected()
+    ) {
+      return {
+        status: 503,
+        method,
+        message: 'Main database unavailable',
+      };
     }
 
     switch (method) {

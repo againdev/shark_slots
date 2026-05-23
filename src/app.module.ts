@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { TokenService } from './token/token.service';
 import { MobuleModule } from './mobule/mobule.module';
 import { CryptoBotModule } from './crypto-bot/crypto-bot.module';
+import { AuthModule } from './auth/auth.module';
 import { RedisModule } from '@liaoliaots/nestjs-redis';
 
 function buildRedisUrl(): string {
@@ -31,6 +32,7 @@ function buildRedisUrl(): string {
     }),
     MobuleModule,
     CryptoBotModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, TokenService],

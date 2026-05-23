@@ -1,3 +1,4 @@
+import { RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppConfig } from './app.config';
@@ -15,7 +16,13 @@ async function bootstrap() {
   const port = configService.get<AppConfig['APP_PORT']>('APP_PORT');
 
   app.use(cookieParser());
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', {
+    exclude: [
+      { path: 'auth/google/login', method: RequestMethod.GET },
+      { path: 'auth/google/redirect', method: RequestMethod.GET },
+      { path: 'auth/recaptcha', method: RequestMethod.GET },
+    ],
+  });
 
   const allowedHeaders = configService.get<AppConfig['CORS_ALLOWED_HEADERS']>(
     'CORS_ALLOWED_HEADERS',

@@ -76,6 +76,28 @@ export class AppConfig {
   @IsOptional()
   @IsString()
   readonly MAIN_CRYPTO_BOT_WEBHOOK_URL?: string;
+
+  /** Telegram Bot token — Login Widget HMAC (+ connect Telegram). */
+  @IsString()
+  readonly BOT_TOKEN: string;
+
+  @IsString()
+  readonly GOOGLE_CLIENT_ID: string;
+
+  @IsString()
+  readonly GOOGLE_CLIENT_SECRET: string;
+
+  /** Redirect URI в Google Cloud Console (домен основного сайта). */
+  @IsString()
+  readonly GOOGLE_CALLBACK_URL: string;
+
+  /** Site key reCAPTCHA v2 — домен в Google Console: slots. */
+  @IsString()
+  readonly RECAPTCHA_SITE_KEY: string;
+
+  /** Secret key reCAPTCHA v2 — проверка siteverify. */
+  @IsString()
+  readonly RECAPTCHA_SECRET_KEY: string;
 }
 
 export function validateAppConfig(config: Record<string, unknown>) {

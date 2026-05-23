@@ -302,7 +302,18 @@ npm run start:dev      # Nest без Docker app
 
 ---
 
+## Auth (Telegram Login Widget + Google)
+
+Логика выполняется на **shark_slots** (без Telegram Mini App / `authenticate` initData); для пользователя URL остаются на **основном домене** (nginx main проксирует `/auth/google/` на slots).
+
+| Документ | Содержание |
+|----------|------------|
+| [docs/AUTH-setup-checklist.md](./docs/AUTH-setup-checklist.md) | Что добавить в `.env`, nginx, Google Console |
+| [docs/TZ-auth-main-backend.md](./docs/TZ-auth-main-backend.md) | ТЗ для Cursor: правки `fullstack/shark/backend` |
+
+---
+
 ## Документация
 
 - [AGENTS.md](./AGENTS.md) — архитектура, Mobule, env, техдолг
-- [docs/](./docs/) — Crypto Pay, чеклисты
+- [docs/](./docs/) — Crypto Pay, auth, чеклисты

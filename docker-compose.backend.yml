@@ -15,7 +15,8 @@ services:
     networks:
       - slots-net
     ports:
-      - '127.0.0.1:4001:4001'
+      # 0.0.0.0 — main nginx (157.22.192.247) → :4001; ufw allow from 157.22.192.247 to any port 4001
+      - '4001:4001'
     env_file:
       - .env
     environment:

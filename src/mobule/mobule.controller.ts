@@ -36,6 +36,9 @@ export class MobuleController {
 
     try {
       const result = await this.mobuleService.callback(method, data, req);
+      if (method === 'check.session') {
+        console.log('check.session response:', result);
+      }
       return result;
     } catch (error) {
       if (

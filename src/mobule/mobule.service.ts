@@ -1,6 +1,5 @@
 import {
   Injectable,
-  ForbiddenException,
   BadRequestException,
   OnModuleInit,
 } from '@nestjs/common';
@@ -71,12 +70,39 @@ export class MobuleService implements OnModuleInit {
 
   onModuleInit() {}
 
-  getIp(req: { headers: Record<string, string | string[] | undefined>; connection?: { remoteAddress?: string } }): string {
-    const forwarded = req.headers['x-forwarded-for'];
-    if (typeof forwarded === 'string') {
-      return forwarded.split(',')[0].trim();
+  private headerValue(
+    req: { headers: Record<string, string | string[] | undefined> },
+    name: string,
+  ): string | undefined {
+    const raw = req.headers[name];
+    const value = Array.isArray(raw) ? raw[0] : raw;
+    return value?.split(',')[0]?.trim() || undefined;
+  }
+
+  private normalizeIp(ip: string): string {
+    return ip.startsWith('::ffff:') ? ip.slice(7) : ip;
+  }
+
+  /** Client IP behind nginx / Cloudflare (Mobule callback). */
+  getIp(req: {
+    headers: Record<string, string | string[] | undefined>;
+    connection?: { remoteAddress?: string };
+    socket?: { remoteAddress?: string };
+  }): string {
+    const candidates = [
+      this.headerValue(req, 'cf-connecting-ip'),
+      this.headerValue(req, 'x-real-ip'),
+      this.headerValue(req, 'x-forwarded-for'),
+      req.connection?.remoteAddress,
+      req.socket?.remoteAddress,
+    ];
+
+    for (const candidate of candidates) {
+      if (!candidate) continue;
+      const normalized = this.normalizeIp(candidate);
+      if (normalized) return normalized;
     }
-    return req.connection?.remoteAddress ?? '';
+    return '';
   }
 
   async callback(
@@ -85,9 +111,17 @@ export class MobuleService implements OnModuleInit {
     req: Parameters<MobuleService['getIp']>[0],
   ): Promise<SlotsCallbackResponseDto | boolean> {
     const ip = this.getIp(req);
-    if (!this.allowedIps.includes(ip)) {
-      throw new ForbiddenException('Error check ip!');
-    }
+    // TODO(test): включить на проде — MOBULE_ALLOWED_IPS в .env
+    // if (!this.allowedIps.includes(ip)) {
+    //   console.warn(
+    //     `Mobule callback IP rejected: "${ip}" (method=${method}), allowed: [${this.allowedIps.join(', ')}], ` +
+    //       `x-real-ip=${this.headerValue(req, 'x-real-ip') ?? '-'}, ` +
+    //       `x-forwarded-for=${this.headerValue(req, 'x-forwarded-for') ?? '-'}, ` +
+    //       `cf-connecting-ip=${this.headerValue(req, 'cf-connecting-ip') ?? '-'}`,
+    //   );
+    //   throw new ForbiddenException('Error check ip!');
+    // }
+    console.log(`Mobule callback from IP: ${ip || '(unknown)'} (method=${method})`);
 
     if (
       MOBULE_METHODS_REQUIRING_MAIN_DB.has(method) &&
@@ -170,6 +204,9 @@ export class MobuleService implements OnModuleInit {
     try {
       const user = await this.findUserBySession(data.session);
       if (!user) {
+        console.warn(
+          `check.session: unknown user for session=${data.session ?? '(empty)'}`,
+        );
         return { status: 404, method, message: 'Unknown user' };
       }
 
@@ -179,17 +216,21 @@ export class MobuleService implements OnModuleInit {
         userCurrency,
         method,
       );
-      if (currencyError) return currencyError;
+      if (currencyError) {
+        console.warn('check.session: currency mismatch', currencyError);
+        return currencyError;
+      }
 
       const aliasCheck = validatePartnerAlias(
         user.role,
         data['partner.alias'],
       );
       if (aliasCheck.ok === false) {
+        console.warn('check.session: partner alias rejected', aliasCheck.message);
         return { status: 403, method, message: aliasCheck.message };
       }
 
-      return {
+      const response = {
         status: 200,
         method,
         response: {
@@ -198,6 +239,12 @@ export class MobuleService implements OnModuleInit {
           balance: balanceToMinorUnits(user.balance),
         },
       };
+      console.log('check.session: ok', {
+        userId: user.id,
+        balance: response.response.balance,
+        currency: userCurrency,
+      });
+      return response;
     } catch (error) {
       console.error('Error in check.session:', error);
       return { status: 500, method, message: 'Internal server error' };

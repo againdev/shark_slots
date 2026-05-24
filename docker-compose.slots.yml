@@ -1,0 +1,30 @@
+# Слоты: Mobule callbacks
+# Запуск: docker compose -f docker-compose.slots.yml --env-file .env up -d --build
+
+networks:
+  slots-net:
+    external: true
+    name: slots-net
+
+services:
+  slots:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slots-mobule
+    networks:
+      - slots-net
+    ports:
+      - '127.0.0.1:4002:4002'
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      APP_ROLE: slots
+      APP_ADDRESS: 0.0.0.0
+      APP_PORT: 4002
+    command:
+      - sh
+      - -c
+      - ./scripts/wait-for-postgres.sh && npx prisma db push --schema prisma/local/schema.prisma --skip-generate && node dist/main
+    restart: unless-stopped

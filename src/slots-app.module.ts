@@ -1,16 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { validateAppConfig } from './app.config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TokenService } from './token/token.service';
 import { MobuleModule } from './mobule/mobule.module';
-import { CryptoBotModule } from './crypto-bot/crypto-bot.module';
-import { AuthModule } from './auth/auth.module';
+import { HealthController } from './health/health.controller';
 import { RedisModule } from '@liaoliaots/nestjs-redis';
 import { buildRedisUrl } from './redis-url';
 
-/** Локальная разработка: все модули в одном процессе (APP_ROLE=all). */
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,10 +18,7 @@ import { buildRedisUrl } from './redis-url';
       },
     }),
     MobuleModule,
-    CryptoBotModule,
-    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, TokenService],
+  controllers: [HealthController],
 })
-export class AppModule {}
+export class SlotsAppModule {}

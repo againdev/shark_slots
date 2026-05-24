@@ -30,6 +30,6 @@ COPY --from=builder /app/prisma ./prisma
 COPY scripts/wait-for-postgres.sh ./scripts/wait-for-postgres.sh
 RUN chmod +x ./scripts/wait-for-postgres.sh
 
-EXPOSE 4001
+EXPOSE 4001 4002 4003
 
-CMD ["sh", "-c", "./scripts/wait-for-postgres.sh && npm run start:push:local:prod"]
+CMD ["node", "dist/main"]

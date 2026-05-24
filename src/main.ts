@@ -1,12 +1,26 @@
-import { RequestMethod } from '@nestjs/common';
+import { RequestMethod, Type } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppConfig } from './app.config';
 import { AppModule } from './app.module';
+import { AuthAppModule } from './auth-app.module';
+import { SlotsAppModule } from './slots-app.module';
+import { PaymentsAppModule } from './payments-app.module';
+import { AppRole, resolveAppRole } from './app-role';
 import * as cookieParser from 'cookie-parser';
 
+const ROLE_MODULES: Record<AppRole, Type<unknown>> = {
+  all: AppModule,
+  auth: AuthAppModule,
+  slots: SlotsAppModule,
+  payments: PaymentsAppModule,
+};
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
+  const role = resolveAppRole(process.env.APP_ROLE);
+  const rootModule = ROLE_MODULES[role];
+
+  const app = await NestFactory.create(rootModule, {
     bufferLogs: true,
     rawBody: true,
   });
@@ -15,34 +29,39 @@ async function bootstrap() {
   const adress = configService.get<AppConfig['APP_ADDRESS']>('APP_ADDRESS')!;
   const port = configService.get<AppConfig['APP_PORT']>('APP_PORT');
 
-  app.use(cookieParser());
-  app.setGlobalPrefix('api', {
-    exclude: [
-      { path: 'auth/google/login', method: RequestMethod.GET },
-      { path: 'auth/google/redirect', method: RequestMethod.GET },
-      { path: 'auth/recaptcha', method: RequestMethod.GET },
-    ],
-  });
+  if (role === 'auth' || role === 'all') {
+    app.use(cookieParser());
+  }
 
-  const allowedHeaders = configService.get<AppConfig['CORS_ALLOWED_HEADERS']>(
-    'CORS_ALLOWED_HEADERS',
-  );
-  const credentials =
-    configService.get<AppConfig['CORS_CREDENTIALS']>('CORS_CREDENTIALS');
-  const methods = configService.get<AppConfig['CORS_METHODS']>('CORS_METHODS');
-  const originString =
-    configService.get<AppConfig['CORS_ORIGIN']>('CORS_ORIGIN');
+  if (role === 'auth' || role === 'all') {
+    app.setGlobalPrefix('api', {
+      exclude: [{ path: 'auth/recaptcha', method: RequestMethod.GET }],
+    });
+  } else if (role === 'payments') {
+    app.setGlobalPrefix('api');
+  }
 
-  const origins = originString
-    ? originString.split(',').map((o) => o.trim())
-    : [];
+  if (role === 'auth' || role === 'all') {
+    const allowedHeaders = configService.get<
+      AppConfig['CORS_ALLOWED_HEADERS']
+    >('CORS_ALLOWED_HEADERS');
+    const credentials =
+      configService.get<AppConfig['CORS_CREDENTIALS']>('CORS_CREDENTIALS');
+    const methods = configService.get<AppConfig['CORS_METHODS']>('CORS_METHODS');
+    const originString =
+      configService.get<AppConfig['CORS_ORIGIN']>('CORS_ORIGIN');
 
-  app.enableCors({
-    origin: origins,
-    credentials,
-    allowedHeaders,
-    methods,
-  });
+    const origins = originString
+      ? originString.split(',').map((o) => o.trim())
+      : [];
+
+    app.enableCors({
+      origin: origins,
+      credentials,
+      allowedHeaders,
+      methods,
+    });
+  }
 
   await app.listen(port, adress);
 }

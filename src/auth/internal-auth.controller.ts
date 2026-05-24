@@ -9,9 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import {
   AuthenticateTelegramDto,
-  CompleteGoogleOAuthDto,
   ConnectTelegramDto,
-  GoogleLinkIntentDto,
   VerifyRecaptchaDto,
 } from './auth.dto';
 import { AuthTokenPairDto } from './auth.types';
@@ -36,21 +34,6 @@ export class InternalAuthController {
   async connectTelegram(@Body() body: ConnectTelegramDto): Promise<{ tgId: number }> {
     const tgId = await this.authService.connectTelegramToUser(body);
     return { tgId };
-  }
-
-  @Post('google/complete')
-  async googleComplete(
-    @Body() body: CompleteGoogleOAuthDto,
-  ): Promise<AuthTokenPairDto> {
-    return this.authService.consumeGoogleOAuthCompletion(body.code);
-  }
-
-  @Post('google/link-intent')
-  async googleLinkIntent(
-    @Body() body: GoogleLinkIntentDto,
-  ): Promise<{ state: string }> {
-    const state = await this.authService.createGoogleLinkState(body.userId);
-    return { state };
   }
 
   @Post('verify-recaptcha')

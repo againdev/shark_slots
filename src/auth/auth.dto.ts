@@ -53,16 +53,6 @@ export class ConnectTelegramDto extends AuthenticateTelegramDto {
   userId: string;
 }
 
-export class CompleteGoogleOAuthDto {
-  @IsString()
-  code: string;
-}
-
-export class GoogleLinkIntentDto {
-  @IsString()
-  userId: string;
-}
-
 export class VerifyRecaptchaDto {
   @IsString()
   token: string;

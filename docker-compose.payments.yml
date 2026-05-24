@@ -1,0 +1,27 @@
+# Платежи: Crypto Pay webhook → forward на main
+# Запуск: docker compose -f docker-compose.payments.yml --env-file .env up -d --build
+
+networks:
+  slots-net:
+    external: true
+    name: slots-net
+
+services:
+  payments:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slots-payments
+    networks:
+      - slots-net
+    ports:
+      - '127.0.0.1:4003:4003'
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      APP_ROLE: payments
+      APP_ADDRESS: 0.0.0.0
+      APP_PORT: 4003
+    command: ['node', 'dist/main']
+    restart: unless-stopped

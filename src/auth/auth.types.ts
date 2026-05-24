@@ -9,14 +9,6 @@ export interface JwtSubject {
   photo_url?: string;
 }
 
-export interface GoogleUser {
-  id: string;
-  email?: string;
-  firstName: string;
-  lastName: string;
-  photoUrl?: string;
-}
-
 export interface AuthTokenPairDto {
   accessToken: string;
   refreshToken: string;

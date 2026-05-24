@@ -1,14 +1,19 @@
 import {
   IsArray,
   IsBoolean,
+  IsIn,
   IsNumber,
   IsOptional,
   IsString,
   validateSync,
 } from 'class-validator';
 import { Transform, plainToInstance } from 'class-transformer';
+import { APP_ROLES, AppRole, resolveAppRole } from './app-role';
 
-export class AppConfig {
+class SharedAppConfig {
+  @IsIn(APP_ROLES)
+  readonly APP_ROLE: AppRole;
+
   @IsString()
   readonly NODE_ENV: string;
 
@@ -17,7 +22,9 @@ export class AppConfig {
 
   @IsNumber()
   readonly APP_PORT: number;
+}
 
+class AuthAppConfig extends SharedAppConfig {
   @IsArray()
   @Transform(({ value }) => value.split(','))
   readonly CORS_ALLOWED_HEADERS: string[];
@@ -33,9 +40,6 @@ export class AppConfig {
   readonly CORS_ORIGIN: string;
 
   @IsString()
-  readonly DATABASE_URL: string;
-
-  @IsString()
   readonly ACCESS_TOKEN_SECRET: string;
 
   @IsString()
@@ -48,62 +52,101 @@ export class AppConfig {
   readonly EXPIRES_IN_REFRESH_TOKEN: string;
 
   @IsString()
-  readonly MOBULE_SECRET_TOKEN: string;
-
-  @IsString()
   readonly MAIN_APP_URL: string;
 
-  /** IP Mobule / прокси для колбэков, через запятую. Если не задано — дефолт в MobuleService. */
-  @IsOptional()
-  @IsString()
-  readonly MOBULE_ALLOWED_IPS?: string;
-
-  /** Токен Crypto Pay (@CryptoBot) — для проверки подписи входящего webhook. */
-  @IsString()
-  readonly CRYPTO_BOT_API_TOKEN: string;
-
-  /**
-   * Общий секрет shark_slots → main (заголовок X-Internal-Webhook-Secret).
-   * Должен совпадать с INTERNAL_WEBHOOK_SECRET на основном бэкенде.
-   */
   @IsString()
   readonly INTERNAL_WEBHOOK_SECRET: string;
 
-  /**
-   * Полный URL обработчика на main (если не задан — MAIN_APP_URL + /crypto-bot/y825...).
-   * Пример: https://api.shark.example/crypto-bot/y825xaasdtq9ds4zacsfodra6me7qg
-   */
-  @IsOptional()
-  @IsString()
-  readonly MAIN_CRYPTO_BOT_WEBHOOK_URL?: string;
-
-  /** Telegram Bot token — Login Widget HMAC (+ connect Telegram). */
   @IsString()
   readonly BOT_TOKEN: string;
 
   @IsString()
-  readonly GOOGLE_CLIENT_ID: string;
-
-  @IsString()
-  readonly GOOGLE_CLIENT_SECRET: string;
-
-  /** Redirect URI в Google Cloud Console (домен основного сайта). */
-  @IsString()
-  readonly GOOGLE_CALLBACK_URL: string;
-
-  /** Site key reCAPTCHA v2 — домен в Google Console: slots. */
-  @IsString()
   readonly RECAPTCHA_SITE_KEY: string;
 
-  /** Secret key reCAPTCHA v2 — проверка siteverify. */
   @IsString()
   readonly RECAPTCHA_SECRET_KEY: string;
 }
 
+class SlotsAppConfig extends SharedAppConfig {
+  @IsString()
+  readonly DATABASE_URL: string;
+
+  @IsString()
+  readonly MOBULE_SECRET_TOKEN: string;
+
+  @IsOptional()
+  @IsString()
+  readonly MOBULE_ALLOWED_IPS?: string;
+
+  @IsString()
+  readonly MAIN_APP_URL: string;
+
+  @IsString()
+  readonly ACCESS_TOKEN_SECRET: string;
+
+  @IsString()
+  readonly REFRESH_TOKEN_SECRET: string;
+}
+
+class PaymentsAppConfig extends SharedAppConfig {
+  @IsString()
+  readonly CRYPTO_BOT_API_TOKEN: string;
+
+  @IsString()
+  readonly INTERNAL_WEBHOOK_SECRET: string;
+
+  @IsString()
+  readonly MAIN_APP_URL: string;
+
+  @IsOptional()
+  @IsString()
+  readonly MAIN_CRYPTO_BOT_WEBHOOK_URL?: string;
+}
+
+/** Полный конфиг для локальной разработки (APP_ROLE=all). */
+class AllAppConfig extends AuthAppConfig {
+  @IsString()
+  readonly DATABASE_URL: string;
+
+  @IsString()
+  readonly MOBULE_SECRET_TOKEN: string;
+
+  @IsOptional()
+  @IsString()
+  readonly MOBULE_ALLOWED_IPS?: string;
+
+  @IsString()
+  readonly CRYPTO_BOT_API_TOKEN: string;
+
+  @IsOptional()
+  @IsString()
+  readonly MAIN_CRYPTO_BOT_WEBHOOK_URL?: string;
+}
+
+export type AppConfig = AllAppConfig;
+
 export function validateAppConfig(config: Record<string, unknown>) {
-  const validatedConfig = plainToInstance(AppConfig, config, {
-    enableImplicitConversion: true,
-  });
+  const role = resolveAppRole(
+    typeof config.APP_ROLE === 'string' ? config.APP_ROLE : undefined,
+  );
+  const withRole = { ...config, APP_ROLE: role };
+  const options = { enableImplicitConversion: true };
+
+  let validatedConfig: object;
+  switch (role) {
+    case 'auth':
+      validatedConfig = plainToInstance(AuthAppConfig, withRole, options);
+      break;
+    case 'slots':
+      validatedConfig = plainToInstance(SlotsAppConfig, withRole, options);
+      break;
+    case 'payments':
+      validatedConfig = plainToInstance(PaymentsAppConfig, withRole, options);
+      break;
+    default:
+      validatedConfig = plainToInstance(AllAppConfig, withRole, options);
+  }
+
   const errors = validateSync(validatedConfig, {
     skipMissingProperties: false,
   });

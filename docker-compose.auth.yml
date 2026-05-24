@@ -1,5 +1,5 @@
-# Stack 2/2 — NestJS backend.
-# Запуск: docker compose -f docker-compose.backend.yml up -d --build
+# Логин: Google / Telegram / reCAPTCHA / internal auth API
+# Запуск: docker compose -f docker-compose.auth.yml --env-file .env up -d --build
 
 networks:
   slots-net:
@@ -7,20 +7,21 @@ networks:
     name: slots-net
 
 services:
-  backend:
+  auth:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: slots-backend
+    container_name: slots-auth
     networks:
       - slots-net
     ports:
-      # 0.0.0.0 — main nginx (157.22.192.247) → :4001; ufw allow from 157.22.192.247 to any port 4001
-      - '4001:4001'
+      - '127.0.0.1:4001:4001'
     env_file:
       - .env
     environment:
       NODE_ENV: production
+      APP_ROLE: auth
       APP_ADDRESS: 0.0.0.0
       APP_PORT: 4001
+    command: ['node', 'dist/main']
     restart: unless-stopped

@@ -1,4 +1,4 @@
-# shark_slots
+# shark_handler
 
 Callback-сервер для Shark: **Mobule (слоты)**, **Crypto Pay (платежи)**, **Auth (логин)**.  
 Две БД: локальная PostgreSQL (`SlotSpins`) + удалённая main (`MAIN_DATABASE_URL`).
@@ -165,7 +165,7 @@ docker logs slots-payments --tail 30
 ## Обновление кода
 
 ```bash
-cd /opt/shark_slots
+cd /opt/shark_handler
 git pull
 
 # Пересобрать все три backend-а (один Dockerfile)

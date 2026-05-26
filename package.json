@@ -1,7 +1,7 @@
 {
-  "name": "shark_slots",
+  "name": "shark_handler",
   "version": "0.0.1",
-  "description": "",
+  "description": "Shark callback handler: Mobule slots, auth, Crypto Pay (NestJS)",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

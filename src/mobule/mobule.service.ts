@@ -446,6 +446,7 @@ export class MobuleService implements OnModuleInit {
           requestData,
           amount,
           updatedUser.deposit,
+          userCurrency,
         );
 
         return {
@@ -660,8 +661,9 @@ export class MobuleService implements OnModuleInit {
     requestData: SlotsCallbackRequestDto,
     amount: Decimal,
     userDeposit: Decimal,
+    currency: Currency,
   ): Promise<void> {
-    if (!amount.greaterThan(1)) return;
+    if (!amount.greaterThan(0)) return;
 
     const gameName = requestData.meta?.tag?.game;
     const callback = {
@@ -702,18 +704,34 @@ export class MobuleService implements OnModuleInit {
     );
     if (!mainUrl || !requestData.meta?.tag) return;
 
+    const internalSecret = this.configService.get<
+      AppConfig['INTERNAL_WEBHOOK_SECRET']
+    >('INTERNAL_WEBHOOK_SECRET');
+
+    const betMinor = requestData.meta.tag.bet ?? 0;
+
     try {
       await axios.post(
-        `${mainUrl}/live-feed/push-bet`,
+        `${mainUrl.replace(/\/$/, '')}/live-feed/push-bet`,
         {
-          slotId: requestData.meta.tag.game_id,
+          gameId: requestData.meta.tag.game_id,
+          gameName: gameName ?? undefined,
           photoUrl: user.photoUrl,
           firstName: user.firstName,
-          bet: (requestData.meta.tag.bet ?? 0) / 100,
+          bet: betMinor / 100,
           result: amount.toNumber(),
           userDeposit: Number(userDeposit),
+          currency,
         },
-        { headers: { 'Content-Type': 'application/json' } },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            ...(internalSecret
+              ? { 'X-Internal-Webhook-Secret': internalSecret }
+              : {}),
+          },
+          timeout: 5000,
+        },
       );
     } catch (err) {
       console.error('live-feed/push-bet error:', err?.message ?? err);

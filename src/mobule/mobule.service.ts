@@ -318,7 +318,7 @@ export class MobuleService implements OnModuleInit {
       const rakeBackPercent = calculateUserRakeBackPercent(user);
       const rakeBackIncrement = computeRakeBackIncrement(amount, rakeBackPercent);
 
-      return await this.mainPrismaService.$transaction(async (mainTx) => {
+      const result = await this.mainPrismaService.$transaction(async (mainTx) => {
         const updatedUser = await mainTx.user.update({
           where: { id: user.id },
           data: {
@@ -350,14 +350,24 @@ export class MobuleService implements OnModuleInit {
         });
 
         return {
-          status: 200,
+          status: 200 as const,
           method,
           response: {
             currency: userCurrency,
             balance: balanceToMinorUnits(updatedUser.balance),
           },
+          userId: user.id,
+          balanceAfter: updatedUser.balance,
         };
       });
+
+      this.publishBalanceToMain(result.userId, result.balanceAfter);
+
+      return {
+        status: result.status,
+        method: result.method,
+        response: result.response,
+      };
     } catch (error) {
       console.error('Error processing userBet:', error);
       return { status: 500, method, message: 'Internal server error' };
@@ -404,7 +414,7 @@ export class MobuleService implements OnModuleInit {
         rakeBackPercent,
       );
 
-      return await this.mainPrismaService.$transaction(async (mainTx) => {
+      const result = await this.mainPrismaService.$transaction(async (mainTx) => {
         const updatedUser = await mainTx.user.update({
           where: { id: user.id },
           data: {
@@ -441,23 +451,42 @@ export class MobuleService implements OnModuleInit {
           balance_after: balanceAfter.toNumber(),
         });
 
-        await this.publishWinEvents(
-          user,
-          requestData,
-          amount,
-          updatedUser.deposit,
-          userCurrency,
-        );
-
         return {
-          status: 200,
+          status: 200 as const,
           method,
           response: {
             currency: userCurrency,
             balance: balanceToMinorUnits(updatedUser.balance),
           },
+          winPublish: {
+            user,
+            requestData,
+            amount,
+            deposit: updatedUser.deposit,
+            currency: userCurrency,
+            balanceAfter: updatedUser.balance,
+          },
         };
       });
+
+      await this.publishWinEvents(
+        result.winPublish.user,
+        result.winPublish.requestData,
+        result.winPublish.amount,
+        result.winPublish.deposit,
+        result.winPublish.currency,
+      );
+
+      this.publishBalanceToMain(
+        result.winPublish.user.id,
+        result.winPublish.balanceAfter,
+      );
+
+      return {
+        status: result.status,
+        method: result.method,
+        response: result.response,
+      };
     } catch (error) {
       console.error('Error processing userWin:', error);
       return { status: 500, method, message: 'Internal server error' };
@@ -595,6 +624,8 @@ export class MobuleService implements OnModuleInit {
         }),
       ]);
 
+      this.publishBalanceToMain(user.id, updatedUser.balance);
+
       return {
         status: 200,
         method,
@@ -650,6 +681,41 @@ export class MobuleService implements OnModuleInit {
       }),
     });
     await redis.set(cacheKey, JSON.stringify(history));
+  }
+
+  private publishBalanceToMain(
+    userId: string,
+    balance: Decimal | number,
+  ): void {
+    const mainUrl = this.configService.get<AppConfig['MAIN_APP_URL']>(
+      'MAIN_APP_URL',
+    );
+    if (!mainUrl) return;
+
+    const internalSecret = this.configService.get<
+      AppConfig['INTERNAL_WEBHOOK_SECRET']
+    >('INTERNAL_WEBHOOK_SECRET');
+
+    const safeBalance =
+      Math.round(Math.max(0, Number(balance)) * 10000) / 10000;
+
+    void axios
+      .post(
+        `${mainUrl.replace(/\/$/, '')}/live-feed/push-balance`,
+        { userId, balance: safeBalance },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            ...(internalSecret
+              ? { 'X-Internal-Webhook-Secret': internalSecret }
+              : {}),
+          },
+          timeout: 5000,
+        },
+      )
+      .catch((err) => {
+        console.error('live-feed/push-balance error:', err?.message ?? err);
+      });
   }
 
   private async publishWinEvents(

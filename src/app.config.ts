@@ -59,12 +59,6 @@ class AuthAppConfig extends SharedAppConfig {
 
   @IsString()
   readonly BOT_TOKEN: string;
-
-  @IsString()
-  readonly RECAPTCHA_SITE_KEY: string;
-
-  @IsString()
-  readonly RECAPTCHA_SECRET_KEY: string;
 }
 
 class SlotsAppConfig extends SharedAppConfig {

@@ -53,8 +53,3 @@ export class ConnectTelegramDto extends AuthenticateTelegramDto {
   userId: string;
 }
 
-export class VerifyRecaptchaDto {
-  @IsString()
-  token: string;
-}
-

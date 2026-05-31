@@ -95,7 +95,7 @@ nano .env
 | `INTERNAL_WEBHOOK_SECRET` | ✓ | | ✓ |
 | `ACCESS_TOKEN_SECRET`, `REFRESH_TOKEN_SECRET`, `EXPIRES_IN_*` | ✓ | ✓ | |
 | `CORS_*` | ✓ | | |
-| `BOT_TOKEN`, `GOOGLE_*`, `RECAPTCHA_*` | ✓ | | |
+| `BOT_TOKEN` | ✓ | | |
 | `MOBULE_SECRET_TOKEN`, `MOBULE_ALLOWED_IPS` | | ✓ | |
 | `CRYPTO_BOT_API_TOKEN` | | | ✓ |
 
@@ -271,10 +271,10 @@ npm run start:dev
 
 | Симптом | Что проверить |
 |---------|----------------|
-| 404 на `/auth/recaptcha` | `nginx/slots.conf`: `location ^~ /auth/` → `:4001`; `docker compose restart nginx` |
+| 404 на `/auth/recaptcha` (main) | `nginx/shark.conf`: `location = /auth/recaptcha` → `:4000`; force-recreate nginx |
 | Mobule 502 | `curl http://127.0.0.1:4002/health`; логи `slots-mobule` |
 | Crypto Pay не доходит до main | `curl http://127.0.0.1:4003/api/health`; `MAIN_APP_URL`, `INTERNAL_WEBHOOK_SECRET` |
-| Auth env validation error | В `.env` есть `GOOGLE_*`, `RECAPTCHA_*`, `BOT_TOKEN`, `CORS_*` |
+| Auth env validation error | В `.env` есть `BOT_TOKEN`, `CORS_*`, `MAIN_APP_URL`, `INTERNAL_WEBHOOK_SECRET` |
 | `P1000` Postgres | Креды ≠ том `postgres_data` |
 | Main DB недоступна | Логи `slots-auth` / `slots-mobule` |
 

@@ -8,12 +8,12 @@
 | Callback (Google Console) | `https://look1337amfbqotlamblz911.ru/auth/google/redirect` |
 | После входа | редирект `/?oauth=google`, cookies на main |
 
-## reCAPTCHA — **slots only**
+## reCAPTCHA — **main backend only**
 
 | Что | URL |
 |-----|-----|
-| iframe | `https://slots1337dead…/auth/recaptcha` |
-| verify API | main → `POST slots/api/internal/auth/verify-recaptcha` |
+| iframe | `https://look1337amfbqotlamblz911.ru/auth/recaptcha` |
+| verify | локально на main (`RecaptchaService`), без прокси на slots |
 
 ## main `backend/.env`
 
@@ -22,6 +22,8 @@ APP_DOMAIN=https://look1337amfbqotlamblz911.ru
 GOOGLE_CLIENT_ID=...
 GOOGLE_CLIENT_SECRET=...
 GOOGLE_CALLBACK_URL=https://look1337amfbqotlamblz911.ru/auth/google/redirect
+RECAPTCHA_SITE_KEY=...
+RECAPTCHA_SECRET_KEY=...
 SLOTS_AUTH_BASE_URL=https://slots1337dead.look1337amfbqotlamblz911.ru
 INTERNAL_WEBHOOK_SECRET=...
 ```
@@ -31,26 +33,25 @@ INTERNAL_WEBHOOK_SECRET=...
 ```env
 NEXT_PUBLIC_DOMAIN=https://look1337amfbqotlamblz911.ru
 NEXT_PUBLIC_GOOGLE_AUTH_LINK=https://look1337amfbqotlamblz911.ru/auth/google/login
-NEXT_PUBLIC_SLOTS_RECAPTCHA_URL=https://slots1337dead.look1337amfbqotlamblz911.ru/auth/recaptcha
+# iframe: ${NEXT_PUBLIC_DOMAIN}/auth/recaptcha
 ```
 
 ## slots `.env` (auth container)
 
 ```env
 MAIN_APP_URL=https://look1337amfbqotlamblz911.ru
-RECAPTCHA_SITE_KEY=...
-RECAPTCHA_SECRET_KEY=...
-# Без GOOGLE_* — Google удалён со slots
+# Без GOOGLE_* и RECAPTCHA_* — только Telegram internal auth
 ```
 
 ## nginx
 
-**main `shark.conf`:** `location ^~ /auth/google/` → `127.0.0.1:4000`
+**main `shark.conf`:** `/auth/google/` и `/auth/recaptcha` → `127.0.0.1:4000`
 
-**slots `slots.conf`:** `/auth/recaptcha`, `/api/internal/auth` → `:4001` (нет `/auth/google/`)
+**slots `slots.conf`:** `/api/internal/auth` → `:4001` (нет `/auth/recaptcha`, нет `/auth/google/`)
 
 ## Деплой
 
-1. main: rebuild backend + frontend, reload nginx
-2. slots: rebuild `slots-auth`, reload nginx, `MAIN_APP_URL` = main domain
+1. main: rebuild backend + frontend, **force-recreate nginx** (см. AGENTS.md)
+2. slots: rebuild `slots-auth`, reload nginx (reCAPTCHA больше не нужен на slots)
 3. Google Console redirect URI = main `/auth/google/redirect`
+4. Google reCAPTCHA console: домены main (не slots)

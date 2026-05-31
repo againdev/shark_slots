@@ -1,4 +1,4 @@
-import { RequestMethod, Type } from '@nestjs/common';
+import { Type } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppConfig } from './app.config';
@@ -34,9 +34,7 @@ async function bootstrap() {
   }
 
   if (role === 'auth' || role === 'all') {
-    app.setGlobalPrefix('api', {
-      exclude: [{ path: 'auth/recaptcha', method: RequestMethod.GET }],
-    });
+    app.setGlobalPrefix('api');
   } else if (role === 'payments') {
     app.setGlobalPrefix('api');
   }
